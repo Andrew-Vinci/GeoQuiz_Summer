@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         Question(R.string.question_asia, true)
     )
 
-    private var currentIndex = -1
+    private var currentIndex = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,9 +62,10 @@ class MainActivity : AppCompatActivity() {
                 this,
                 R.string.incorrect_toast,
                 Toast.LENGTH_SHORT
-            ).show()
-             */
+            ).show()             */
         }
+
+        updateQuestion()
 
         binding.questionText.setOnClickListener{
             currentIndex = (currentIndex + 1) % questionBank.size
@@ -77,6 +78,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.prevButton.setOnClickListener{
+            if(currentIndex == 0){
+                currentIndex = questionBank.size
+            }
             currentIndex = (currentIndex - 1) % questionBank.size
             updateQuestion()
         }
