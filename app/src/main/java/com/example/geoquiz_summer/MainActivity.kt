@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         Question(R.string.question_asia, true)
     )
 
-    private var currentIndex = 0
+    private var currentIndex = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.trueButton.setOnClickListener { view: View ->
 
-            Snackbar.make(view, R.string.correct_toast, Snackbar.LENGTH_SHORT).show()
+            checkAnswer(true)
+
+            //Snackbar.make(view, R.string.correct_toast, Snackbar.LENGTH_SHORT).show()
+
             /*
             Toast.makeText(
                 this,
@@ -50,7 +53,9 @@ class MainActivity : AppCompatActivity() {
 
         binding.falseButton.setOnClickListener { view : View ->
 
-            Snackbar.make(view, R.string.incorrect_toast, Snackbar.LENGTH_SHORT).show()
+            checkAnswer(false)
+
+            //Snackbar.make(view, R.string.incorrect_toast, Snackbar.LENGTH_SHORT).show()
 
             /*
             Toast.makeText(
@@ -63,9 +68,26 @@ class MainActivity : AppCompatActivity() {
 
         binding.nextButton.setOnClickListener {
             currentIndex = (currentIndex + 1) % questionBank.size
-            val questionTextResId = questionBank[currentIndex].textResId
-            binding.questionText.setText(questionTextResId)
+            updateQuestion()
         }
 
+    }
+
+    private fun updateQuestion(){
+        val questionTextResId = questionBank[currentIndex].textResId
+        binding.questionText.setText(questionTextResId)
+    }
+
+    private fun checkAnswer(userAnswer: Boolean) {
+        val correctAnswer = questionBank[currentIndex].answer
+
+        val messageResId = if (userAnswer  == correctAnswer){
+            R.string.correct_toast
+        }
+        else{
+            R.string.incorrect_toast
+        }
+
+        Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show()
     }
 }
