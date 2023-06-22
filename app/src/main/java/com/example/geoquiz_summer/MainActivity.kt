@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     )
 
     private var currentIndex = 0
-
+    private var correctAnswers = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -139,6 +139,7 @@ class MainActivity : AppCompatActivity() {
         val correctAnswer = questionBank[currentIndex].answer
 
         val messageResId = if (userAnswer  == correctAnswer){
+            correctAnswers += 1
             R.string.correct_toast
         }
         else{
@@ -146,5 +147,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show()
+
+        if(currentIndex == 5){
+            Toast.makeText(this, (correctAnswers.toDouble() / questionBank.size.toDouble()).toString() + "%", Toast.LENGTH_SHORT).show()
+            correctAnswers = 0
+        }
     }
 }
