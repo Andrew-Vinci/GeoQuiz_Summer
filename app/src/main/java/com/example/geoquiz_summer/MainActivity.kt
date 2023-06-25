@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
     //private var correctAnswers = 0
 
 
+    /*READ THROUGH CODE BEFORE NEXT CHAPTER*/
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate(Bundle?) called")
