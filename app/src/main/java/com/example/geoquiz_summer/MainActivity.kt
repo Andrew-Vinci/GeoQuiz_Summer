@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "Got a QuizViewModel: $quizViewModel")
 
         // Alternative to View Binding
-        //trueButton = findViewById(R.id.true_button)
-        //falseButton = findViewById(R.id.false_button)
+        // trueButton = findViewById(R.id.true_button)
+        // falseButton = findViewById(R.id.false_button)
 
         binding.trueButton.setOnClickListener { view: View ->
 
