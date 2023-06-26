@@ -17,6 +17,8 @@ class QuizViewModel (private val savedStateHandle: SavedStateHandle) : ViewModel
         Question(R.string.question_asia, true)
     )
 
+    // This is a SavedStateHandle Implementation to keep track of index in the
+    // event of a LifeCycle death.
     var currentIndex : Int
         get() = savedStateHandle.get(CURRENT_INDEX_KEY) ?: 0
         set(value) = savedStateHandle.set(CURRENT_INDEX_KEY, value)
@@ -31,6 +33,7 @@ class QuizViewModel (private val savedStateHandle: SavedStateHandle) : ViewModel
     val currentQuestionText: Int
         get() = questionBank[currentIndex].textResId
     fun moveToNext() {
+        //Log.d(TAG, "Updating question text", Exception())
         currentIndex = (currentIndex + 1) % questionBank.size
     }
     fun moveBack(){
