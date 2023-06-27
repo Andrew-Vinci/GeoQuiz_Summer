@@ -1,10 +1,13 @@
 package com.example.geoquiz_summer
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.example.geoquiz_summer.Question
 import com.example.geoquiz_summer.R
@@ -20,6 +23,16 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val quizViewModel: QuizViewModel by viewModels()
+
+    private val cheatLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        // Handle the result
+        if (result.resultCode == Activity.RESULT_OK) {
+            quizViewModel.isCheater =
+                result.data?.getBooleanExtra(EXTRA_ANSWER_SHOWN, false) ?: false
+        }
+    }
 
     /*READ THROUGH CODE BEFORE NEXT CHAPTER*/
 
@@ -102,6 +115,15 @@ class MainActivity : AppCompatActivity() {
             binding.falseButton.isEnabled = true
         }
 
+        binding.cheatButton.setOnClickListener{
+            // Starts a new activity
+            //val intent = Intent(this, CheatActivity::class.java)
+            val answerIsTrue = quizViewModel.currentQuestionAnswer
+            val intent = CheatActivity.newIntent(this@MainActivity, answerIsTrue)
+            //startActivity(intent)
+            cheatLauncher.launch(intent)
+        }
+
     }
 
     // Overrides of various lifecycle states
@@ -142,12 +164,20 @@ class MainActivity : AppCompatActivity() {
         //val correctAnswer = questionBank[currentIndex].answer
         val correctAnswer = quizViewModel.currentQuestionAnswer
 
+        /*
         val messageResId = if (userAnswer  == correctAnswer){
             quizViewModel.correctAnswers += 1
             R.string.correct_toast
         }
         else{
             R.string.incorrect_toast
+        }
+         */
+
+        val messageResId = when {
+            quizViewModel.isCheater -> R.string.judgment_toast
+            userAnswer == correctAnswer -> R.string.correct_toast
+            else -> R.string.incorrect_toast
         }
 
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show()
