@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     /*READ THROUGH CODE BEFORE NEXT CHAPTER*/
+    /*MAKE A NEW BRANCH AND REVIEW PREVIOUS CHAPTERS*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
