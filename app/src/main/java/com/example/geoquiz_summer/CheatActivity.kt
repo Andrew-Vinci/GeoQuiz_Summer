@@ -31,15 +31,19 @@ class CheatActivity : AppCompatActivity() {
         answerIsTrue = intent.getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false)
 
         binding.showAnswerButton.setOnClickListener{
-            //cheatViewModel.answerText = when{
-            //    answerIsTrue -> R.string.true_button
-            //    else -> R.string.false_button
-            //}
-            cheatViewModel.showAnswer(answerIsTrue)
-            binding.answerTextView.setText(cheatViewModel.answerText)
-            setAnswerShownResult(cheatViewModel.isAnswerTrue)
+            val answerText = when{
+                answerIsTrue -> R.string.true_button
+                else -> R.string.false_button
+            }
+            binding.answerTextView.setText(answerText)
+            setAnswerShownResult(true)
+            cheatViewModel.answerWasClicked = true
         }
 
+        if (cheatViewModel.answerWasClicked) {
+            binding.answerTextView.setText(R.string.true_button)
+            setAnswerShownResult(true)
+        }
     }
 
 
