@@ -19,7 +19,7 @@ class QuizViewModel (private val savedStateHandle: SavedStateHandle) : ViewModel
         Question(R.string.question_asia, true)
     )
 
-    var questionCheat = false
+    var numberOfCheats = 0
 
     var isCheater: Boolean
         get() = savedStateHandle.get(IS_CHEATER_KEY) ?: false

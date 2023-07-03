@@ -29,6 +29,12 @@
         android:text="@string/show_answer_button"
         />
 
+    <TextView
+        android:id="@+id/show_sdk_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
 
 
 </LinearLayout>

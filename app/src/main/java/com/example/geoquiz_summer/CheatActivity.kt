@@ -3,6 +3,7 @@ package com.example.geoquiz_summer
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -44,8 +45,9 @@ class CheatActivity : AppCompatActivity() {
             binding.answerTextView.setText(R.string.true_button)
             setAnswerShownResult(true)
         }
-    }
 
+        binding.showSdkVersion.text = getString(R.string.api_level, Build.VERSION_CODES.S)
+    }
 
     private fun setAnswerShownResult(isAnswerShown: Boolean) {
         val data = Intent().apply {
