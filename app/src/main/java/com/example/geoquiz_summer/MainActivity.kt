@@ -72,6 +72,8 @@ class MainActivity : AppCompatActivity() {
 
             binding.trueButton.isEnabled = true
             binding.falseButton.isEnabled = true
+
+            quizViewModel.isCheater = false
         }
 
         // Previous Button Listener
@@ -86,6 +88,8 @@ class MainActivity : AppCompatActivity() {
 
             binding.trueButton.isEnabled = true
             binding.falseButton.isEnabled = true
+
+            quizViewModel.isCheater = false
         }
 
         // Cheat Button Listener
